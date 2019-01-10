@@ -82,9 +82,10 @@
             this.WebLinkLabel.AutoSize = true;
             this.WebLinkLabel.Location = new System.Drawing.Point(8, 115);
             this.WebLinkLabel.Name = "WebLinkLabel";
-            this.WebLinkLabel.Size = new System.Drawing.Size(283, 13);
+            this.WebLinkLabel.Size = new System.Drawing.Size(243, 13);
             this.WebLinkLabel.TabIndex = 4;
-            this.WebLinkLabel.Text = "https://twitchtokengenerator.com/quick/ggAcGYpQ17";
+            this.WebLinkLabel.TabStop = true;
+            this.WebLinkLabel.Text = "https://streamernotifications.xathz.net/oauth/";
             this.WebLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.WebLinkLabel_LinkClicked);
             // 
             // TwitchChannelLabel

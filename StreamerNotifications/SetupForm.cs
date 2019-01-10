@@ -31,7 +31,7 @@ namespace StreamerNotifications {
             }
         }
 
-        private void WebLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://twitchtokengenerator.com/quick/ggAcGYpQ17");
+        private void WebLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://streamernotifications.xathz.net/oauth/");
 
         private void OAuthTokenTextBox_TextChanged(object sender, EventArgs e) {
             if (!string.IsNullOrWhiteSpace(OAuthTokenTextBox.Text)) {

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Streamer Notifications OAuth Token</title>
+        <link rel="shortcut icon" type="image/png" href="../streamernotifications.png" />
+        <link href="../bootstrap.cosmo.min.css" rel="stylesheet" />
+        <script src="../jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var clientid = "v2uxmjgeakc3510uu8wifcvh36sd7l";
+                var scope    = "user_read+chat_login+chat:read+chat:edit+whispers:read";
+                var redirect = "https://streamernotifications.xathz.net/oauth/";
+
+                $.urlParam = function(name) {
+                    var results = new RegExp('[\?#&]' + name + '=([^&]*)').exec(window.location.href);
+                    if (results == null) return null;
+                    return decodeURI(results[1]) || 0;
+                }
+
+                var token = $.urlParam('access_token');
+                var error = $.urlParam('error_description');
+
+                if (token) {
+                    $("#oauthtoken").val('oauth:' + encodeURIComponent(token));
+                    $("#success").show();
+                    $("#content").hide();
+                    dataLayer.push({"TwitchAuth": "Success"});
+                }
+
+                if (error) {
+                    $("#faildescription").val((error).replace(/\+/g, ' '));
+                    $("#fail").show();
+                    dataLayer.push({"TwitchAuth": "Fail"});
+                }
+
+                $("#twitchlink").attr("href", 'https://id.twitch.tv/oauth2/authorize?response_type=token&force_verify=true&client_id=' + clientid + '&scope=' + scope + '&redirect_uri=' + redirect);
+            });
+        </script>
+    </head>
+
+    <body style="padding-top: 2rem;">
+        <div style="width: 35rem; margin: auto;">
+            <div class="card border-info mb-3" style="max-width: 80rem;">
+                <div class="card-header font-weight-bold">Streamer Notifications OAuth Token</div>
+                <div class="card-body">
+
+                    <div class="alert alert alert-success" id="success" style="display: none;">
+                        <p>You successfully authorized with Twitch.</p>
+                        <p>Do <strong>NOT</strong> share your token with anyone. Copy the token below and paste into the prompt in Streamer Notifications.</p>
+                        <label class="control-label" for="oauthtoken">OAuth Token</label>
+                        <input class="form-control" id="oauthtoken" type="text" placeholder="oauth:exampletoken" readonly="" />
+                    </div>
+
+                    <div class="alert alert alert-danger" id="fail" style="display: none;">
+                        <p>Failed to verify your account on Twitch, please try again. If this keeps happening please submit an issue on <a class="alert-link" href="https://github.com/Xathz/Streamer-Notifications/issues" target="_blank" role="button">GitHub</a>.</p>
+                        <label class="control-label" for="faildescription">Error</label>
+                        <input class="form-control" id="faildescription" type="text" placeholder="unknown" readonly="" />
+                    </div>
+
+                    <div id="content">
+                        <p class="card-text">A OAuth Token is needed to use Streamer Notifications.</p>
+                        <div class="mx-auto text-center">
+                            <a class="btn btn-info" id="twitchlink" role="button">Connect with Twitch</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
