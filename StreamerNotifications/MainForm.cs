@@ -69,6 +69,7 @@ namespace StreamerNotifications {
 
             _NotificationsClient.UserFilter.SetUserWhitelist(SettingsManager.Configuration.Notifications.Whitelist.UsersAsList);
             _NotificationsClient.UserFilter.SetUserBlacklist(SettingsManager.Configuration.Notifications.Blacklist.UsersAsList);
+            _NotificationsClient.MessageFilter.SetMessages(SettingsManager.Configuration.Notifications.Blacklist.Messages);
 
             _NotificationsClient.Notification += NotificationsClient_Notification;
             _NotificationsClient.ChangingChannel += NotificationsClient_ChangingChannel;
@@ -304,6 +305,7 @@ namespace StreamerNotifications {
             TopMostCheckBox.Checked = SettingsManager.Configuration.TopMost;
             _NotificationsClient.UserFilter.SetUserWhitelist(SettingsManager.Configuration.Notifications.Whitelist.UsersAsList);
             _NotificationsClient.UserFilter.SetUserBlacklist(SettingsManager.Configuration.Notifications.Blacklist.UsersAsList);
+            _NotificationsClient.MessageFilter.SetMessages(SettingsManager.Configuration.Notifications.Blacklist.Messages);
 
             try {
                 _NotificationsClient.ChangeChannel(SettingsManager.Configuration.Notifications.TwitchChannel);

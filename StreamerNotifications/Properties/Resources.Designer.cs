@@ -173,6 +173,16 @@ namespace StreamerNotifications.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NotificationHub_16x {
+            get {
+                object obj = ResourceManager.GetObject("NotificationHub_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Remove_16xMD {
             get {
                 object obj = ResourceManager.GetObject("Remove_16xMD", resourceCulture);

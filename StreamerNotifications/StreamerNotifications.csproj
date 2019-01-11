@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <None Include="Resources\NotificationHub_16x.png" />
     <None Include="Resources\StreamerNotifications_Icon.ico" />
     <None Include="Resources\Broadcaster_18x.png" />
     <None Include="Resources\Remove_16xMD.png" />

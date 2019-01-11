@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using StreamerNotifications.Notifications.Filters;
 using StreamerNotifications.Settings;
+using Humanizer;
+using StreamerNotifications.Notifications;
+using System.Linq;
 
 namespace StreamerNotifications {
 
@@ -21,22 +25,33 @@ namespace StreamerNotifications {
         }
 
         private void SettingsForm_Load(object sender, EventArgs e) {
+            FiltersTabControlImageList.Images.Add("settings", Properties.Resources.Settings_16x);
+            FiltersTabControlImageList.Images.Add("notifications", Properties.Resources.NotificationHub_16x);
             FiltersTabControlImageList.Images.Add("userfilter", Properties.Resources.FilterUser_16x);
             FiltersTabControlImageList.Images.Add("messagefilter", Properties.Resources.FilterTextbox_16x);
+            GeneralTabPage.ImageKey = "settings";
+            NotificationsTabPage.ImageKey = "notifications";
             UserFiltersTabPage.ImageKey = "userfilter";
             MessageFiltersTabPage.ImageKey = "messagefilter";
 
+            // General
             TopMostCheckBox.Checked = SettingsManager.Configuration.TopMost;
             MinimizeToTrayCheckBox.Checked = SettingsManager.Configuration.MinimizeToTray;
             CloseToTrayCheckBox.Checked = SettingsManager.Configuration.CloseToTray;
 
+            // Notifications
             TwitchTokenTextBox.Text = SettingsManager.Configuration.Notifications.TwitchToken;
             TwitchChannelTextBox.Text = SettingsManager.Configuration.Notifications.TwitchChannel;
             MaximumNotificationsNumericUpDown.Value = SettingsManager.Configuration.Notifications.MaximumNotifications;
             OnlyShowMentionsCheckBox.Checked = SettingsManager.Configuration.Notifications.OnlyShowMentions;
 
+            // User Filters
             WhitelistListBox.DataSource = SettingsManager.Configuration.Notifications.Whitelist.Users;
             BlacklistListBox.DataSource = SettingsManager.Configuration.Notifications.Blacklist.Users;
+
+            // Message Filters
+            MessageFilterTypeComboBox.DataSource = Enum.GetValues(typeof(MessageFilterType));
+            SettingsManager.Configuration.Notifications.Blacklist.Messages.ForEach(x => AddMessageFilterItem(x));
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -55,6 +70,9 @@ namespace StreamerNotifications {
             } else {
                 SettingsManager.Configuration.Notifications.TwitchChannel = TwitchChannelTextBox.Text.Trim();
             }
+
+            SettingsManager.Configuration.Notifications.Blacklist.Messages.Clear();
+            foreach (ListViewItem item in MessageFiltersListView.Items) { SettingsManager.Configuration.Notifications.Blacklist.Messages.Add((MessageFilterItem)item.Tag); }
 
             SettingsManager.Save();
         }
@@ -77,7 +95,7 @@ namespace StreamerNotifications {
 
         private void CloseToTrayCheckBox_CheckedChanged(object sender, EventArgs e) => SettingsManager.Configuration.CloseToTray = CloseToTrayCheckBox.Checked;
 
-        private void NewTwitchTokenLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://twitchtokengenerator.com/quick/ggAcGYpQ17");
+        private void NewTwitchTokenLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://streamernotifications.xathz.net/oauth/");
 
         private void ShowHideTwitchTokenButton_Click(object sender, EventArgs e) => TwitchTokenTextBox.UseSystemPasswordChar = !TwitchTokenTextBox.UseSystemPasswordChar;
 
@@ -143,6 +161,65 @@ namespace StreamerNotifications {
             if (MessageBox.Show($"Remove {selectedUser} from the blacklist?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes) {
                 SettingsManager.Configuration.Notifications.Blacklist.Users.Remove(selectedUser);
             }
+        }
+
+        private void MessageFiltersListView_SelectedIndexChanged(object sender, EventArgs e) {
+            MessageFilterRemoveButton.Enabled = (MessageFiltersListView.SelectedItems.Count != 0);
+        }
+
+        private void MessageFilterStringTextBox_TextChanged(object sender, EventArgs e) {
+            MessageFilterAddButton.Enabled = !string.IsNullOrWhiteSpace(MessageFilterStringTextBox.Text);
+        }
+
+        private void MessageFilterStringTextBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                MessageFilterAddButton.PerformClick();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void MessageFilterAddButton_Click(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(MessageFilterStringTextBox.Text)) { return; }
+            Enum.TryParse(MessageFilterTypeComboBox.SelectedValue.ToString(), out MessageFilterType selectedType);
+
+            MessageFilterItem messageFilterItem = new MessageFilterItem {
+                Type = selectedType,
+                CaseSensitive = MessageFilterCaseSensitiveCheckBox.Checked,
+                String = MessageFilterStringTextBox.Text
+            };
+
+            AddMessageFilterItem(messageFilterItem);
+        }
+
+        private void MessageFilterRemoveButton_Click(object sender, EventArgs e) {
+            if (MessageFiltersListView.SelectedItems.Count == 0) { return; }
+            ListViewItem selectedMessageFilter = MessageFiltersListView.SelectedItems[0];
+            MessageFilterItem castedMessageFilter = (MessageFilterItem)selectedMessageFilter.Tag;
+
+            if (MessageBox.Show(this, $"Remove ({castedMessageFilter.ToString()}) from the message filters?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes) {
+                MessageFiltersListView.Items.Remove(selectedMessageFilter);
+            }
+        }
+
+        private void AddMessageFilterItem(MessageFilterItem messageFilterItem) {
+            ListViewItem itemType = new ListViewItem {
+                Tag = messageFilterItem,
+                Text = messageFilterItem.Type.ToString()
+            };
+
+            ListViewItem.ListViewSubItem itemCaseSensitive = new ListViewItem.ListViewSubItem {
+                Text = messageFilterItem.CaseSensitive.ToString().Humanize()
+            };
+            itemType.SubItems.Add(itemCaseSensitive);
+
+            ListViewItem.ListViewSubItem itemString = new ListViewItem.ListViewSubItem {
+                Text = messageFilterItem.String
+            };
+            itemType.SubItems.Add(itemString);
+
+            MessageFiltersListView.Items.Add(itemType);
+
+            // Enum.TryParse<Status>(cbStatus.SelectedValue.ToString(), out status); 
         }
 
     }
