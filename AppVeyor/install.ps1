@@ -1,4 +1,4 @@
-$content = Get-Content "Properties\AssemblyInfo.cs"
+$content = Get-Content "StreamerNotifications\Properties\AssemblyInfo.cs"
 $match = [regex]::Match($content, 'AssemblyVersion\(\"(.+?)\"\)')
 
 if ($match.Success) {
