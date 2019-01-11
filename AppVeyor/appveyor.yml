@@ -6,3 +6,6 @@ before_build:
 build:
   project: StreamerNotifications.sln
   verbosity: normal
+version: 1.0.0.{build}
+install:
+  - ps: AppVeyor\install.ps1
