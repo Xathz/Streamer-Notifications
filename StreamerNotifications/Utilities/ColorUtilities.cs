@@ -3,7 +3,6 @@ using System.Drawing;
 
 namespace StreamerNotifications.Utilities {
 
-    /// <remarks></remarks>
     public static class ColorUtilities {
 
         // Color fade testing

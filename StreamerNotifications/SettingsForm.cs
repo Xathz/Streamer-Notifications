@@ -218,8 +218,6 @@ namespace StreamerNotifications {
             itemType.SubItems.Add(itemString);
 
             MessageFiltersListView.Items.Add(itemType);
-
-            // Enum.TryParse<Status>(cbStatus.SelectedValue.ToString(), out status); 
         }
 
     }

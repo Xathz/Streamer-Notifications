@@ -2,11 +2,11 @@
 
 namespace StreamerNotifications.CustomControls {
 
+    /// <remarks>https://stackoverflow.com/a/442828</remarks>
     public class ListViewNoFlicker : ListView {
-
-        /// <remarks>https://stackoverflow.com/a/442828</remarks>
+     
         public ListViewNoFlicker() {
-            //Activate double buffering
+            // Activate double buffering
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
 
             // Enable the OnNotifyMessage event so we get a chance to filter out Windows messages before they get to the form's WndProc
@@ -14,7 +14,7 @@ namespace StreamerNotifications.CustomControls {
         }
 
         protected override void OnNotifyMessage(Message m) {
-            //Filter out the WM_ERASEBKGND message
+            // Filter out the WM_ERASEBKGND message
             if (m.Msg != 0x14) {
                 base.OnNotifyMessage(m);
             }
