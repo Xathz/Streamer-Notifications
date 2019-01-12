@@ -54,11 +54,11 @@ namespace StreamerNotifications {
                 ArchiveFileName = Path.Combine(Constants.LogDirectory, "Error{#}.Archive.log"),
                 ArchiveEvery = FileArchivePeriod.Day,
                 ArchiveNumbering = ArchiveNumberingMode.Rolling,
-                MaxArchiveFiles = 30,
+                MaxArchiveFiles = 7,
                 ConcurrentWrites = false
             };
             loggingConfiguration.AddTarget(fileTarget_Error);
-            loggingConfiguration.AddRule(LogLevel.Warn, LogLevel.Fatal, Constants.ApplicationNameFormatted);
+            loggingConfiguration.AddRule(LogLevel.Error, LogLevel.Fatal, Constants.ApplicationNameFormatted);
 
             // Apply all the custom configurations to the LogManager
             LogManager.Configuration = loggingConfiguration;

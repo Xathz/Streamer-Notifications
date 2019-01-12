@@ -50,7 +50,12 @@ namespace StreamerNotifications {
         /// <summary>
         /// The programs user-agent.
         /// </summary>
-        public static string UserAgent => $"Mozilla/5.0 ({Environment.OSVersion.ToString().Replace("Microsoft ", string.Empty)}; {((Environment.Is64BitOperatingSystem) ? "x64" : "x86")}) {ApplicationNameFormatted}/{Version.Parse(System.Windows.Forms.Application.ProductVersion).ToString(3)} (+https://git.io/vFLMP)";
+        public static string UserAgent => $"Mozilla/5.0 ({Environment.OSVersion.ToString().Replace("Microsoft ", string.Empty)}; {((Environment.Is64BitOperatingSystem) ? "x64" : "x86")}) {ApplicationNameFormatted}/{Version.Parse(System.Windows.Forms.Application.ProductVersion).ToString(3)} (+https://git.io/fhnmq)";
+
+        /// <summary>
+        /// Update file url.
+        /// </summary>
+        public const string UpdateUrl = "https://raw.githubusercontent.com/Xathz/Streamer-Notifications/master/update.json";
 
         /// <summary>
         /// A default blacklist to load. These are all bots.
