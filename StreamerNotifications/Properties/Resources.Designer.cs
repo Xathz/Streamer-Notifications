@@ -201,6 +201,16 @@ namespace StreamerNotifications.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StreamerNotifications_128x {
+            get {
+                object obj = ResourceManager.GetObject("StreamerNotifications_128x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon StreamerNotifications_Icon {

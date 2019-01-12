@@ -28,6 +28,8 @@ namespace StreamerNotifications {
                 LoggingManager.Log.Info("First run setup complete.");
             }
 
+            new UpdateForm(true);
+
             Application.Run(new MainForm());
         }
 

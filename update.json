@@ -1,0 +1,15 @@
+{
+    "currentVersion": {
+        "major": 1,
+        "minor": 0,
+        "build": 3
+    },
+    "released": "2019-01-12T00:50:11.8683465Z",
+    "required": false,
+    "description": "First release!",
+    "changes": [
+        "This is the first release so... everything is new."
+    ],
+    "webpageUrl": "https://github.com/Xathz/Streamer-Notifications/releases/tag/v1.0.3",
+    "fileUrl": "https://github.com/Xathz/Streamer-Notifications/releases/download/v1.0.3/StreamerNotifications_v1.0.3.zip"
+}

@@ -211,6 +211,12 @@
     <Compile Include="Settings\Notifications.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
     <Compile Include="Settings\Whitelist.cs" />
+    <Compile Include="UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForm.Designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\ColorUtilities.cs" />
     <Compile Include="Utilities\ImageUtilities.cs" />
     <Compile Include="SettingsForm.cs">
@@ -239,6 +245,9 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="app.manifest" />
+    <EmbeddedResource Include="UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="FodyWeavers.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -258,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <None Include="Resources\StreamerNotifications_128x.png" />
     <None Include="Resources\NotificationHub_16x.png" />
     <None Include="Resources\StreamerNotifications_Icon.ico" />
     <None Include="Resources\Broadcaster_18x.png" />
