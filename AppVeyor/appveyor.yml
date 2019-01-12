@@ -9,3 +9,8 @@ build:
 version: 1.0.0.{build}
 install:
   - ps: AppVeyor\install.ps1
+skip_commits:
+  files:
+    - AppVeyor/**/*
+    - docs/**/*
+    - '**/*.md'
