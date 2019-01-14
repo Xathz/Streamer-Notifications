@@ -4,9 +4,6 @@
 
 <div align="center">Show only important messages from your Twitch mods or select community members.</div>
 
-[![Build status](https://ci.appveyor.com/api/projects/status/5cvq360hleqe3bsq/branch/master?svg=true)](https://ci.appveyor.com/project/Xathz/streamer-notifications/branch/master)
-[![GitHub release](https://img.shields.io/github/release/xathz/streamer-notifications.svg)](https://github.com/Xathz/Streamer-Notifications/releases/latest)
-
 ## Features
 * Shows messages only from people on a whitelist
 * No need to whitelist Twitch staff, admins, global mods, or channel mods
@@ -18,6 +15,10 @@
 * Ignores duplicate messages
 
 This is meant to be a super-efficient way of getting important messages from your moderators and people you know/trust who are whitelisted by you.
+
+[![Build status](https://ci.appveyor.com/api/projects/status/5cvq360hleqe3bsq/branch/master?svg=true)](https://ci.appveyor.com/project/Xathz/streamer-notifications/branch/master)
+[![GitHub release](https://img.shields.io/github/release/xathz/streamer-notifications.svg)](https://github.com/Xathz/Streamer-Notifications/releases/latest)
+
 
 ## How-to use
 1) When you run it for the first time it will ask you for an OAuth Token. Some information and a link will be presented for you to read and follow.
